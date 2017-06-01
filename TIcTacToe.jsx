@@ -5,10 +5,15 @@ class Button extends React.Component {
     }
     
     setPlayer = () => {
+    
 	        this.setState((prevState)=>{        		
             if(prevState.currentPlayer==null){
         				this.props.validateStatus(this.props.rowNumber, this.props.colNumber)
                 return {currentPlayer: this.props.currentPlayer}
+            }
+            else
+            {
+            		return {currentPlayer: null}
             }
         });
     }
@@ -86,11 +91,10 @@ const Lines = (props) => {
     );
 };
 
-
 class Game extends React.Component {
 
     static initialState = () => ({
-        numberOfElements: 5,
+        numberOfElements: 3,
         currentPlayer: 1,
         player1: [],
         player2: [],
@@ -99,7 +103,7 @@ class Game extends React.Component {
 
 		state = Game.initialState();
     resetGame = () => {
-			debugger;
+    	debugger;
 			this.setState(Game.initialState());
     }
     
@@ -181,13 +185,16 @@ class Game extends React.Component {
         return (
             <div class="text-center">
                 <h2>Tic Tac Toe</h2>
-                <Lines
-                    currentPlayer={this.state.currentPlayer}
-                    numberOfElements={this.state.numberOfElements}
-                    validateStatus={this.validateStatus}
-                />
+                
                 { this.state.winner == null ?
-                  <PlayerIndicator currentPlayer={this.state.currentPlayer}/> :
+                		<div><Lines
+                        currentPlayer={this.state.currentPlayer}
+                        numberOfElements={this.state.numberOfElements}
+                        validateStatus={this.validateStatus}
+                    />
+                
+                  <PlayerIndicator currentPlayer={this.state.currentPlayer}/>
+                  </div> :
                   <WinnerIndicator winner={this.state.winner}/> }
                                     
                   <div className="btn btn-warning btn-sm" onClick={this.resetGame}>
