@@ -94,11 +94,15 @@ class Game extends React.Component {
         currentPlayer: 1,
         player1: [],
         player2: [],
-        winner: null
+        winner: null        
     });
 
 		state = Game.initialState();
-    resetGame = () => this.setState(Game.initialState());
+    resetGame = () => {
+			debugger;
+			this.setState(Game.initialState());
+    }
+    
     setPlayer = () => {
     		 this.setState((prevState)=>{  
             if(prevState.currentPlayer===1){
@@ -185,8 +189,7 @@ class Game extends React.Component {
                 { this.state.winner == null ?
                   <PlayerIndicator currentPlayer={this.state.currentPlayer}/> :
                   <WinnerIndicator winner={this.state.winner}/> }
-                  
-                  
+                                    
                   <div className="btn btn-warning btn-sm" onClick={this.resetGame}>
                       <i className="fa fa-refresh"></i> 
                   </div>
